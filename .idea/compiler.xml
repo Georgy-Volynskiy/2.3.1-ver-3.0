@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="untitled1" />
         <module name="testgroup" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="spring-mvc" target="17" />
+      <module name="spring-mvc" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

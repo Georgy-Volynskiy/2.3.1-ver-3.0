@@ -1,49 +1,40 @@
 package web.dao;
 
+import org.springframework.stereotype.Repository;
 import web.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
+@Repository
 public class UserDAOImpl implements UserDAO {
 
-    private final EntityManager em;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @Autowired
-    public UserDAOImpl(EntityManager em) {
-        this.em = em;
+    @Override
+    public void saveUser(User user) {
+        entityManager.persist(user);
     }
 
     @Override
-    @Transactional
-    public List allUsers() {
-        return em.createQuery("from User").getResultList();
+    public void deleteUser(Long id) {
+        entityManager.remove(getUserById(id));
     }
 
     @Override
-    @Transactional
-    public void add(User user) {
-        em.persist(user);
+    public void updateUser(User user) {
+        entityManager.merge(user);
+        entityManager.flush();
     }
 
     @Override
-    @Transactional
-    public void remove(User user) {
-        em.remove(em.contains(user) ? user : em.merge(user));
+    public List<User> findAll() {
+        return entityManager.createQuery("from User").getResultList();
     }
 
     @Override
-    @Transactional
-    public void edit(User user) {
-        em.merge(user);
-    }
-
-    @Override
-    @Transactional
-    public User getById(int id) {
-        return em.find(User.class, id);
+    public User getUserById(Long id) {
+        return entityManager.find(User.class, id);
     }
 }
