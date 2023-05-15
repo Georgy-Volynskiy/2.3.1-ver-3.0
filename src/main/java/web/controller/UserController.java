@@ -34,13 +34,13 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/deleteUser/{id}")
+    @DeleteMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/";
     }
 
-    @GetMapping("/updateUser/{id}")
+    @PatchMapping("/updateUser/{id}")
     public String updateUser(@PathVariable Long id, Model model) {
         model.addAttribute("update", userService.getUserById(id));
         return "updateUser";
