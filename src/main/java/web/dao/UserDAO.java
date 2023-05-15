@@ -5,9 +5,9 @@ import web.model.User;
 import java.util.List;
 
 public interface UserDAO {
-    void saveUser(User user);
-    void deleteUser(Long id);
-    void updateUser(User user);
-    List<User> findAll();
-    User getUserById(Long id);
+    List<User> getAllUsers();
+    User getUser(int id);
+    void addUser(User user);
+    void update(User updatedUser);
+    void delete(int id);
 }
